@@ -10,7 +10,7 @@ export class CalculatorViewComponent implements OnInit {
   public operator: any;
   public activeString = '0';
   public setToZero = true;
-  public activeOperatorinUse: boolean = false;
+  public activeOperatorinUse = false;
   public activeOperator = '';
   public num1 = 0;
   public num2 = 0;
@@ -48,19 +48,23 @@ export class CalculatorViewComponent implements OnInit {
   }
 
   handleOperator(operator) {
+    if (this.activeOperatorinUse) {
+      this.calculateResult();
+    }
     switch (operator) {
       case 'add':
         this.activeOperator = '+';
-        console.log("active operator", this.activeOperatorinUse)
         if (!this.activeOperatorinUse) {
           this.num1 = parseFloat(this.activeString);
           // this.activeString = '0';
           this.setToZero = true;
           this.activeOperatorinUse = true;
         } else {
-
-          this.num1 += parseFloat(this.activeString);
-          this.activeString = this.num1.toString();
+          this.activeString = this.addNumber(this.num1, this.activeString).toString();
+          this.setToZero = true;
+          this.num1 = 0;
+          this.activeOperatorinUse = false;
+          this.activeOperator = '';
         }
         break;
       case 'subtract':
@@ -71,7 +75,11 @@ export class CalculatorViewComponent implements OnInit {
           this.setToZero = true;
           this.activeOperatorinUse = true;
         } else {
-          this.num1 -= parseFloat(this.activeString);
+          this.activeString = this.subtractNumber(this.num1, this.activeString).toString();
+          this.setToZero = true;
+          this.num1 = 0;
+          this.activeOperatorinUse = false;
+          this.activeOperator = '';
         }
         break;
     case 'multiply':
@@ -82,7 +90,11 @@ export class CalculatorViewComponent implements OnInit {
           this.setToZero = true;
           this.activeOperatorinUse = true;
         } else {
-          this.num1 *= parseFloat(this.activeString);
+          this.activeString = this.multiplyNumber(this.num1, this.activeString).toString();
+          this.setToZero = true;
+          this.num1 = 0;
+          this.activeOperatorinUse = false;
+          this.activeOperator = '';
         }
         break;
     case 'divide':
@@ -93,7 +105,11 @@ export class CalculatorViewComponent implements OnInit {
           this.setToZero = true;
           this.activeOperatorinUse = true;
         } else {
-          this.num1 /= parseFloat(this.activeString);
+          this.activeString = this.divideNumber(this.num1, this.activeString).toString();
+          this.setToZero = true;
+          this.num1 = 0;
+          this.activeOperatorinUse = false;
+          this.activeOperator = '';
         }
         break;
     }
@@ -128,5 +144,12 @@ export class CalculatorViewComponent implements OnInit {
     this.activeString = '0';
     this.activeOperator = '';
     this.setToZero = true;
+  }
+
+  handlePercent() {
+    this.activeString = (parseFloat(this.activeString) / 100).toString();
+  }
+  reverseNumber() {
+    this.activeString = (-(parseFloat(this.activeString))).toString();
   }
 }
