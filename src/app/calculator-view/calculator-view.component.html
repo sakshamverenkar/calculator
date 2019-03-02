@@ -1,0 +1,39 @@
+<div class="calculator-view-component">
+  <div class="input-div">
+    <div class="result-string">
+      {{activeString}}
+    </div>
+  </div>
+  <div class="main-row">
+    <div class="row ac-div-row">
+      <span class="ac" (click)="handleAc()"> AC </span>
+      <span class="" > <sup>+ </sup>/<sub>-</sub> </span>
+      <span class="" > % </span>
+      <span class="divide operator" (click)="handleOperator('divide')"
+            (click)="handleOperator('divide')"> /</span>
+    </div>
+    <div class="row">
+      <span (click)="createStringValue(7, 'number')" > 7 </span>
+      <span (click)="createStringValue(8, 'number')"> 8 </span>
+      <span (click)="createStringValue(9, 'number')"> 9 </span>
+      <span  class="operator" (click)="handleOperator('multiply')"> * </span>
+    </div>
+    <div class="row">
+      <span (click)="createStringValue(4, 'number')"> 4 </span>
+      <span (click)="createStringValue(5, 'number')"> 5 </span>
+      <span (click)="createStringValue(6, 'number')"> 6 </span>
+      <span  class="operator" (click)="handleOperator('subtract')"> - </span>
+    </div>
+    <div class="row">
+      <span (click)="createStringValue(1, 'number')"> 1 </span>
+      <span (click)="createStringValue(2, 'number')"> 2 </span>
+      <span (click)="createStringValue(3, 'number')"> 3 </span>
+      <span class="operator" (click)="handleOperator('add')"> + </span>
+    </div>
+    <div class="row">
+      <span class="zero" (click)="createStringValue(0, 'number')"> 0 </span>
+      <span (click)="createStringValue('.', 'number')"> . </span>
+      <span class="operator" (click)="calculateResult()"> = </span>
+    </div>
+  </div>
+</div>
